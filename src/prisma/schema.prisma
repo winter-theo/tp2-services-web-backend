@@ -1,0 +1,65 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "windows"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  passwordHash String
+  role         Role      @default(USER)
+  createdAt    DateTime  @default(now())
+  messages     Message[]
+  articles     Article[] @relation("ArticleAuthor")
+}
+
+model Article {
+  id        Int           @id @default(autoincrement())
+  title     String
+  content   String
+  status    ArticleStatus @default(DRAFT)
+  createdAt DateTime      @default(now())
+  authorId  Int?
+  author    User?         @relation("ArticleAuthor", fields: [authorId], references: [id], onDelete: SetNull)
+  fishes    ArticleFish[]
+}
+
+model Fish {
+  id          Int           @id @default(autoincrement())
+  name        String
+  description String
+  articles    ArticleFish[]
+}
+
+model Message {
+  id         Int      @id @default(autoincrement())
+  content    String
+  senderRole Role
+  createdAt  DateTime @default(now())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ArticleFish {
+  articleId Int
+  fishId    Int
+  article   Article @relation(fields: [articleId], references: [id])
+  fish      Fish    @relation(fields: [fishId], references: [id])
+
+  @@id([articleId, fishId])
+}

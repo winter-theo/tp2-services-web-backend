@@ -1,0 +1,343 @@
+{
+  "info": {
+    "name": "Aquarium Backend API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "GET /health",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/health"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "POST /auth/register (user)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newuser@aquarium.local\",\n  \"password\": \"user123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "POST /auth/register (admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newadmin@aquarium.local\",\n  \"password\": \"admin123\",\n  \"role\": \"ADMIN\"\n}"
+            }
+          }
+        },
+        {
+          "name": "POST /auth/login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@aquarium.local\",\n  \"password\": \"admin123\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users (admin)",
+      "item": [
+        {
+          "name": "GET /users",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-id", "value": "{{adminUserId}}" }
+            ],
+            "url": "{{baseUrl}}/users"
+          }
+        },
+        {
+          "name": "GET /users/:id",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-id", "value": "{{adminUserId}}" }
+            ],
+            "url": "{{baseUrl}}/users/{{userId}}"
+          }
+        },
+        {
+          "name": "PUT /users/:id",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-user-id", "value": "{{adminUserId}}" }
+            ],
+            "url": "{{baseUrl}}/users/{{userId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"updated-user@aquarium.local\",\n  \"role\": \"USER\"\n}"
+            }
+          }
+        },
+        {
+          "name": "DELETE /users/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "x-user-id", "value": "{{adminUserId}}" }
+            ],
+            "url": "{{baseUrl}}/users/{{userId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fish",
+      "item": [
+        {
+          "name": "GET /fish",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fish"
+          }
+        },
+        {
+          "name": "GET /fish?q=neon",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fish?q=neon"
+          }
+        },
+        {
+          "name": "GET /fish/:id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fish/{{fishId}}"
+          }
+        },
+        {
+          "name": "POST /fish (admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-user-id", "value": "{{adminUserId}}" }
+            ],
+            "url": "{{baseUrl}}/fish",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Guppy\",\n  \"description\": \"Poisson vif et facile pour debuter.\"\n}"
+            }
+          }
+        },
+        {
+          "name": "PUT /fish/:id (admin)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-user-id", "value": "{{adminUserId}}" }
+            ],
+            "url": "{{baseUrl}}/fish/{{fishId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Description mise a jour.\"\n}"
+            }
+          }
+        },
+        {
+          "name": "DELETE /fish/:id (admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "x-user-id", "value": "{{adminUserId}}" }
+            ],
+            "url": "{{baseUrl}}/fish/{{fishId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Articles",
+      "item": [
+        {
+          "name": "GET /articles",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/articles"
+          }
+        },
+        {
+          "name": "GET /articles?q=cycle",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/articles?q=cycle"
+          }
+        },
+        {
+          "name": "GET /articles?status=PUBLISHED",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/articles?status=PUBLISHED"
+          }
+        },
+        {
+          "name": "GET /articles?fishId=",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/articles?fishId={{fishId}}"
+          }
+        },
+        {
+          "name": "GET /articles/:id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/articles/{{articleId}}"
+          }
+        },
+        {
+          "name": "POST /articles (admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-user-id", "value": "{{adminUserId}}" }
+            ],
+            "url": "{{baseUrl}}/articles",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Guide de cyclage\",\n  \"content\": \"Lancer le cycle de l'azote pendant 4 semaines.\",\n  \"status\": \"DRAFT\",\n  \"fishIds\": [{{fishId}}]\n}"
+            }
+          }
+        },
+        {
+          "name": "PUT /articles/:id (admin)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-user-id", "value": "{{adminUserId}}" }
+            ],
+            "url": "{{baseUrl}}/articles/{{articleId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"PUBLISHED\"\n}"
+            }
+          }
+        },
+        {
+          "name": "PUT /articles/:id/publish (admin)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "x-user-id", "value": "{{adminUserId}}" }
+            ],
+            "url": "{{baseUrl}}/articles/{{articleId}}/publish"
+          }
+        },
+        {
+          "name": "DELETE /articles/:id (admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "x-user-id", "value": "{{adminUserId}}" }
+            ],
+            "url": "{{baseUrl}}/articles/{{articleId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Article-Fish Associations",
+      "item": [
+        {
+          "name": "POST /articles/:id/fish/:fishId (admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "x-user-id", "value": "{{adminUserId}}" }
+            ],
+            "url": "{{baseUrl}}/articles/{{articleId}}/fish/{{fishId}}"
+          }
+        },
+        {
+          "name": "DELETE /articles/:id/fish/:fishId (admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "x-user-id", "value": "{{adminUserId}}" }
+            ],
+            "url": "{{baseUrl}}/articles/{{articleId}}/fish/{{fishId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Messages",
+      "item": [
+        {
+          "name": "GET /users/:id/messages (self/admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-id", "value": "{{userId}}" }
+            ],
+            "url": "{{baseUrl}}/users/{{userId}}/messages"
+          }
+        },
+        {
+          "name": "POST /users/:id/messages (self/admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-user-id", "value": "{{userId}}" }
+            ],
+            "url": "{{baseUrl}}/users/{{userId}}/messages",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Bonjour, j'ai une question sur les nitrates.\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin Inbox",
+      "item": [
+        {
+          "name": "GET /admin/messages/pending (admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-id", "value": "{{adminUserId}}" }
+            ],
+            "url": "{{baseUrl}}/admin/messages/pending"
+          }
+        }
+      ]
+    }
+  ]
+}
