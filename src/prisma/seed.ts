@@ -14,6 +14,7 @@ const main = async (): Promise<void> => {
 
   const admin = await prisma.user.create({
     data: {
+      id: 1,
       email: "admin@aquarium.local",
       passwordHash: hashPassword("admin123"),
       role: "ADMIN",
@@ -22,6 +23,7 @@ const main = async (): Promise<void> => {
 
   const user = await prisma.user.create({
     data: {
+      id: 2,
       email: "user@aquarium.local",
       passwordHash: hashPassword("user123"),
       role: "USER",
@@ -30,6 +32,7 @@ const main = async (): Promise<void> => {
 
   const neonTetra = await prisma.fish.create({
     data: {
+      id: 1,
       name: "Neon tetra",
       description: "Petit poisson grégaire demandant une eau douce acide.",
     },
@@ -37,6 +40,7 @@ const main = async (): Promise<void> => {
 
   const corydoras = await prisma.fish.create({
     data: {
+      id: 2,
       name: "Corydoras panda",
       description: "Poisson de fond pacifique qui aime vivre en groupe.",
     },
@@ -44,6 +48,7 @@ const main = async (): Promise<void> => {
 
   await prisma.fish.create({
     data: {
+      id: 3,
       name: "Betta splendens",
       description: "Poisson territorial à maintenir seul dans un bac adapté.",
     },
@@ -51,6 +56,7 @@ const main = async (): Promise<void> => {
 
   const article = await prisma.article.create({
     data: {
+      id: 1,
       title: "Démarrer un aquarium planté",
       content: "Choisir un sol nutritif, un éclairage adapté et un cycle de l'azote complet.",
       status: "PUBLISHED",
@@ -68,11 +74,13 @@ const main = async (): Promise<void> => {
   await prisma.message.createMany({
     data: [
       {
+        id: 1,
         content: "Bonjour, quels paramètres pour un betta ?",
         senderRole: "USER",
         userId: user.id,
       },
       {
+        id: 2,
         content: "Bonjour, voici les paramètres recommandés pour un betta...",
         senderRole: "ADMIN",
         userId: user.id,

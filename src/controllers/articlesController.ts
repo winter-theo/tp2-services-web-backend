@@ -150,6 +150,12 @@ export const deleteArticle = async (req: AuthenticatedRequest, res: Response): P
     return;
   }
 
+  const linkedCount = await prisma.articleFish.count({ where: { articleId } });
+  if (linkedCount > 0) {
+    res.status(409).json({ message: "article is linked to fishes" });
+    return;
+  }
+
   await prisma.article.delete({ where: { id: articleId } });
   res.status(204).send();
 };

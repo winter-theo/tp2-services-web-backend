@@ -38,3 +38,13 @@ npm run dev
 
 ## Tests
 Les endpoints ont été testés avec Postman. Les requêtes de test sont disponibles dans le dossier `/postman`.
+
+## Notes 
+- Entre chaque test postman, il faut impérativement faire la commande :
+```bash
+npm run db:seed
+```
+
+- L’erreur 409 est maîtrisée.
+
+- Je n’ai pas testé toutes les cas d'erreurs possibles.  
