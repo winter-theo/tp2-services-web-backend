@@ -91,6 +91,12 @@ export const deleteFish = async (req: AuthenticatedRequest, res: Response): Prom
     return;
   }
 
+  const linkedCount = await prisma.articleFish.count({ where: { fishId } });
+  if (linkedCount > 0) {
+    res.status(409).json({ message: "fish is linked to articles" });
+    return;
+  }
+
   await prisma.fish.delete({ where: { id: fishId } });
   res.status(204).send();
 };

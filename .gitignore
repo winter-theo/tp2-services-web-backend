@@ -18,3 +18,5 @@ Thumbs.db
 # Caches
 .cache/
 .prisma/
+
+postman/globals/
