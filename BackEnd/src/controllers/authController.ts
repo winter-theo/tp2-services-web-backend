@@ -3,6 +3,7 @@ import { Response } from "express";
 import prisma from "../prisma/client";
 import { AuthenticatedRequest } from "../models/request";
 import { LoginInput, RegisterInput } from "../models/dtos";
+import { signAuthToken } from "../security/jwt";
 
 const hashPassword = (password: string): string => {
   return crypto.createHash("sha256").update(password).digest("hex");
@@ -52,10 +53,19 @@ export const login = async (req: AuthenticatedRequest, res: Response): Promise<v
     return;
   }
 
-  res.status(200).json({
+  const currentUser = {
     id: user.id,
     email: user.email,
     role: user.role,
-    createdAt: user.createdAt,
+  };
+
+  const token = signAuthToken(currentUser);
+
+  res.status(200).json({
+    token,
+    user: {
+      ...currentUser,
+      createdAt: user.createdAt,
+    },
   });
 };
