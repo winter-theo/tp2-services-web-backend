@@ -2,6 +2,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicLayout from "./components/PublicLayout";
+import AboutPage from "./pages/AboutPage";
+import ArticleDetailPage from "./pages/ArticleDetailPage";
 import AdminPage from "./pages/AdminPage";
 import AdminArticleCreatePage from "./pages/AdminArticleCreatePage";
 import AdminArticleEditPage from "./pages/AdminArticleEditPage";
@@ -13,6 +15,7 @@ import AdminFishPage from "./pages/AdminFishPage";
 import AdminFishViewPage from "./pages/AdminFishViewPage";
 import ArticlesPage from "./pages/ArticlesPage";
 import DashboardPage from "./pages/DashboardPage";
+import FishDetailPage from "./pages/FishDetailPage";
 import FishPage from "./pages/FishPage";
 import LoginPage from "./pages/LoginPage";
 import MessagesPage from "./pages/MessagesPage";
@@ -29,7 +32,10 @@ export default function App() {
       >
         <Route path="/" element={<Navigate to="/articles" replace />} />
         <Route path="/articles" element={<ArticlesPage />} />
+        <Route path="/articles/:articleId" element={<ArticleDetailPage />} />
         <Route path="/fish" element={<FishPage />} />
+        <Route path="/fish/:fishId" element={<FishDetailPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Route>
 
       <Route path="/login" element={<LoginPage />} />
