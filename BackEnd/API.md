@@ -4,6 +4,9 @@ URL de base : `http://localhost:3000`
 
 ## Authentification
 
+Header pour les routes protégées :
+`Authorization: Bearer <jwt>`
+
 ### POST /auth/register
 Objectif : Créer un compte utilisateur avec un rôle.
 Entrée :
@@ -29,7 +32,7 @@ Codes :
 - 409 : email déjà utilisé.
 
 ### POST /auth/login
-Objectif : Valider les identifiants et retourner le profil utilisateur.
+Objectif : Valider les identifiants et retourner un JWT + le profil utilisateur.
 Entrée :
 ```json
 {
@@ -40,10 +43,13 @@ Entrée :
 Sortie (200) :
 ```json
 {
-  "id": 1,
-  "email": "admin@aquarium.local",
-  "role": "ADMIN",
-  "createdAt": "2025-02-01T12:00:00.000Z"
+  "token": "<jwt>",
+  "user": {
+    "id": 1,
+    "email": "admin@aquarium.local",
+    "role": "ADMIN",
+    "createdAt": "2025-02-01T12:00:00.000Z"
+  }
 }
 ```
 Codes :
@@ -53,7 +59,7 @@ Codes :
 
 ## Utilisateurs (admin)
 
-Toutes les routes exigent le header `x-user-id` d'un admin.
+Toutes les routes exigent le header `Authorization: Bearer <jwt>` d'un admin.
 
 ### GET /users
 Objectif : Lister tous les utilisateurs.
@@ -348,7 +354,7 @@ Codes :
 
 ## Messages
 
-Toutes les routes exigent le header `x-user-id` de l'utilisateur cible ou d'un admin.
+Toutes les routes exigent le header `Authorization: Bearer <jwt>` de l'utilisateur cible ou d'un admin.
 
 ### GET /users/:id/messages
 Objectif : Récupérer l'historique du tchat d'un utilisateur.
