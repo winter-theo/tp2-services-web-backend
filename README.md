@@ -1,50 +1,40 @@
-# Backend – Services Web (TP2)
+# OS
+.DS_Store
+Thumbs.db
 
-Projet réalisé dans le cadre du laboratoire 2 du cours 420-941 – Services Web.
+# Editor / IDE
+.vscode/
+.idea/
 
-Ce projet est une API REST développée avec Node.js, Express et TypeScript. Le backend est connecté à une base de données PostgreSQL hébergée sur Neon et respecte l’architecture MVC demandée dans l’énoncé du laboratoire.
+# Dependencies
+node_modules/
+BackEnd/node_modules/
+FrontEnd/node_modules/
 
-## Technologies
-Node.js, Express.js, TypeScript, PostgreSQL (Neon), Prisma, Postman.
+# Build outputs
+dist/
+BackEnd/dist/
+FrontEnd/dist/
 
-## Structure du projet
-src/controllers  
-src/models  
-src/routes  
-src/prisma/migrations  
-src/index.ts  
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-## Prérequis
-Node.js (version 18 ou 20 LTS) et npm.
+# Environment / secrets
+.env
+.env.*
+BackEnd/.env
+FrontEnd/.env
 
-## Installation
-```bash
-npm install
-```
+# Runtime / temporary files
+tmp/
+temp/
+.cache/
+coverage/
 
-## Base de données
-La base de données PostgreSQL est déjà créée et hébergée sur Neon.  
-La connexion est configurée via le fichier `.env` inclus dans le projet.
-
-Avant de lancer le serveur, le client Prisma doit être généré localement :
-```bash
-npx prisma generate
-```
-
-## Lancement
-```bash
-npm run dev
-```
-
-## Tests
-Les endpoints ont été testés avec Postman. Les requêtes de test sont disponibles dans le dossier `/postman`.
-
-## Notes 
-- Entre chaque test postman, il faut impérativement faire la commande :
-```bash
-npm run db:seed
-```
-
-- L’erreur 409 est maîtrisée.
-
-- Je n’ai pas testé toutes les cas d'erreurs possibles.  
+# Local DB export dumps (can contain real data)
+BackEnd/db-export*.json
+!BackEnd/db-export.json
