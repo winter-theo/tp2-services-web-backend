@@ -36,6 +36,22 @@ export default function ArticleDetailPage() {
         <article className="sub-card">
           <h2>{article.title}</h2>
           <div className="rich-content" dangerouslySetInnerHTML={{ __html: article.content || "" }} />
+          <p className="hint">Poissons associés:</p>
+          {article.fishes?.length ? (
+            <ul className="inline-links-list">
+              {article.fishes.map((entry) =>
+                entry.fish ? (
+                  <li key={`${article.id}-${entry.fish.id}`}>
+                    <Link className="inline-link" to={`/fish/${entry.fish.id}`}>
+                      {entry.fish.name}
+                    </Link>
+                  </li>
+                ) : null
+              )}
+            </ul>
+          ) : (
+            <p className="hint">Aucun</p>
+          )}
         </article>
       ) : null}
       {article && article.status !== "PUBLISHED" ? <p>Article non disponible en accès public.</p> : null}

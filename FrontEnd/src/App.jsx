@@ -4,7 +4,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import PublicLayout from "./components/PublicLayout";
 import AboutPage from "./pages/AboutPage";
 import ArticleDetailPage from "./pages/ArticleDetailPage";
-import AdminPage from "./pages/AdminPage";
 import AdminArticleCreatePage from "./pages/AdminArticleCreatePage";
 import AdminArticleEditPage from "./pages/AdminArticleEditPage";
 import AdminArticlesPage from "./pages/AdminArticlesPage";
@@ -13,8 +12,8 @@ import AdminFishCreatePage from "./pages/AdminFishCreatePage";
 import AdminFishEditPage from "./pages/AdminFishEditPage";
 import AdminFishPage from "./pages/AdminFishPage";
 import AdminFishViewPage from "./pages/AdminFishViewPage";
+import AdminUsersPage from "./pages/AdminUsersPage";
 import ArticlesPage from "./pages/ArticlesPage";
-import DashboardPage from "./pages/DashboardPage";
 import FishDetailPage from "./pages/FishDetailPage";
 import FishPage from "./pages/FishPage";
 import LoginPage from "./pages/LoginPage";
@@ -48,13 +47,21 @@ export default function App() {
           </ProtectedRoute>
         }
       >
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/dashboard" element={<Navigate to="/articles" replace />} />
         <Route path="/messages" element={<MessagesPage />} />
         <Route
           path="/admin"
           element={
             <ProtectedRoute role="ADMIN">
-              <AdminPage />
+              <Navigate to="/admin/articles" replace />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute role="ADMIN">
+              <AdminUsersPage />
             </ProtectedRoute>
           }
         />

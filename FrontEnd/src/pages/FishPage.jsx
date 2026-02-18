@@ -43,7 +43,6 @@ export default function FishPage() {
 
   return (
     <div>
-      <h1>Fish</h1>
       <ApiStatus error={error} />
       {loading ? <p>Chargement...</p> : null}
       {!loading ? (

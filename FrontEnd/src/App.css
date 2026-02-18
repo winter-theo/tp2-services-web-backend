@@ -435,3 +435,8 @@ pre {
 .search-title {
   margin: 0 0 8px;
 }
+
+.inline-links-list {
+  margin: 0 0 10px;
+  padding-left: 18px;
+}

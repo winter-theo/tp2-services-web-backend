@@ -1,19 +1,18 @@
 import { useState } from "react";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import ApiStatus from "../components/ApiStatus";
 import { useAuth } from "../context/AuthContext";
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, user } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   if (isAuthenticated) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to={user?.role === "ADMIN" ? "/admin/articles" : "/articles"} replace />;
   }
 
   const onSubmit = async (event) => {
@@ -21,8 +20,8 @@ export default function LoginPage() {
     setLoading(true);
     setError("");
     try {
-      await login(email, password);
-      const redirectPath = location.state?.from || "/dashboard";
+      const result = await login(email, password);
+      const redirectPath = result?.user?.role === "ADMIN" ? "/admin/articles" : "/articles";
       navigate(redirectPath, { replace: true });
     } catch (e) {
       setError(e.message);

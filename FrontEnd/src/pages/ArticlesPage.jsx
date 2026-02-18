@@ -89,7 +89,6 @@ export default function ArticlesPage() {
 
   return (
     <div>
-      <h1>Articles</h1>
       <form className="filters" onSubmit={onSubmit}>
         <input
           type="text"
@@ -133,10 +132,22 @@ export default function ArticlesPage() {
         <article className="sub-card">
           <h2>{currentArticle.title}</h2>
           <div className="rich-content" dangerouslySetInnerHTML={{ __html: currentArticle.content || "" }} />
-          <p className="hint">
-            Lié aux poissons:{" "}
-            {currentArticle.fishes?.map((entry) => entry.fish?.name).filter(Boolean).join(", ") || "Aucun"}
-          </p>
+          <p className="hint">Lié aux poissons:</p>
+          {currentArticle.fishes?.length ? (
+            <ul className="inline-links-list">
+              {currentArticle.fishes.map((entry) =>
+                entry.fish ? (
+                  <li key={`${currentArticle.id}-${entry.fish.id}`}>
+                    <Link className="inline-link" to={`/fish/${entry.fish.id}`}>
+                      {entry.fish.name}
+                    </Link>
+                  </li>
+                ) : null
+              )}
+            </ul>
+          ) : (
+            <p className="hint">Aucun</p>
+          )}
           <div className="row">
             <button type="button" onClick={goPrev} disabled={pageIndex === 0}>
               Précédent

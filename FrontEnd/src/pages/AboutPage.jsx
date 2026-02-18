@@ -1,5 +1,4 @@
 const ABOUT_HTML = `
-  <h1>À propos</h1>
   <p>
     Bienvenue sur notre espace aquarium. Cette page présente le projet, son objectif
     et les contenus disponibles pour les visiteurs.

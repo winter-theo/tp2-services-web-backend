@@ -6,3 +6,10 @@ export function listUsers(token) {
     token,
   });
 }
+
+export function deleteUser(userId, token) {
+  return apiRequest(`/users/${userId}`, {
+    method: "DELETE",
+    token,
+  });
+}
