@@ -91,12 +91,14 @@ export default function ArticlesPage() {
     <div>
       <form className="filters" onSubmit={onSubmit}>
         <input
+          className="articles-search-input"
           type="text"
           placeholder="Recherche (titre/contenu)"
           value={filters.q}
           onChange={(e) => setFilters((prev) => ({ ...prev, q: e.target.value }))}
         />
         <select
+          className="fish-filter-select"
           value={filters.fishId}
           onChange={(e) => setFilters((prev) => ({ ...prev, fishId: e.target.value }))}
         >
@@ -148,15 +150,15 @@ export default function ArticlesPage() {
           ) : (
             <p className="hint">Aucun</p>
           )}
-          <div className="row">
+          <div className="row article-pagination">
             <button type="button" onClick={goPrev} disabled={pageIndex === 0}>
-              Précédent
+              {"<"}
             </button>
             <span className="hint">
               Article {pageIndex + 1} / {total}
             </span>
             <button type="button" onClick={goNext} disabled={pageIndex >= total - 1}>
-              Suivant
+              {">"}
             </button>
           </div>
         </article>

@@ -60,13 +60,43 @@ export const createMessage = async (req: AuthenticatedRequest, res: Response): P
 };
 
 export const listPendingMessages = async (_req: AuthenticatedRequest, res: Response): Promise<void> => {
-  const latestMessages = await prisma.message.findMany({
-    orderBy: { createdAt: "desc" },
-    distinct: ["userId"],
-    include: { user: true },
+  const usersWithMessages = await prisma.user.findMany({
+    where: {
+      messages: {
+        some: {},
+      },
+    },
+    select: {
+      id: true,
+      email: true,
+      messages: {
+        select: {
+          id: true,
+          senderRole: true,
+          createdAt: true,
+        },
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
+    },
+    orderBy: {
+      email: "asc",
+    },
   });
 
-  const pending = latestMessages.filter((message) => message.senderRole === "USER");
+  const conversations = usersWithMessages.map((user) => {
+    const totalMessages = user.messages.length;
+    const lastMessage = totalMessages > 0 ? user.messages[totalMessages - 1] : null;
 
-  res.status(200).json(pending);
+    return {
+      userId: user.id,
+      email: user.email,
+      totalMessages,
+      pending: lastMessage?.senderRole === "USER",
+      lastMessageAt: lastMessage?.createdAt ?? null,
+    };
+  });
+
+  res.status(200).json(conversations);
 };

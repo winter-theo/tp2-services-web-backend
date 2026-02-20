@@ -103,10 +103,30 @@ h1 {
   margin-bottom: 12px;
 }
 
+.articles-search-input {
+  flex: 1;
+  min-width: 260px;
+}
+
+.fish-filter-select {
+  width: 180px;
+  max-width: 100%;
+}
+
+.article-pagination {
+  justify-content: center;
+  align-items: center;
+}
+
 .row {
   display: flex;
   gap: 8px;
   margin: 10px 0;
+}
+
+.row input[type="text"] {
+  flex: 1;
+  min-width: 0;
 }
 
 .row.compact {
@@ -439,4 +459,108 @@ pre {
 .inline-links-list {
   margin: 0 0 10px;
   padding-left: 18px;
+}
+
+.messages-admin-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) 1fr;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.messages-conversations,
+.messages-chat {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px;
+  background: #ffffff;
+}
+
+.messages-conversations h2,
+.messages-chat h2 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.conversation-btn {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1f2937;
+  display: grid;
+  gap: 4px;
+  padding: 8px;
+}
+
+.conversation-btn-active {
+  border-color: #0f172a;
+  box-shadow: 0 0 0 1px #0f172a inset;
+}
+
+.pending-badge,
+.resolved-badge {
+  display: inline-block;
+  width: fit-content;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.pending-badge {
+  background: #fff7ed;
+  color: #9a3412;
+  border: 1px solid #fed7aa;
+}
+
+.resolved-badge {
+  background: #ecfdf5;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.chat-thread {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.messages-chat .chat-thread {
+  min-height: 320px;
+  max-height: 56vh;
+  overflow: auto;
+}
+
+.chat-bubble {
+  max-width: 75%;
+  padding: 8px 10px;
+  border-radius: 12px;
+  display: grid;
+  gap: 4px;
+}
+
+.chat-bubble p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.chat-bubble small {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.chat-bubble-incoming {
+  justify-self: start;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+}
+
+.chat-bubble-outgoing {
+  justify-self: end;
+  background: #dbeafe;
+  border: 1px solid #93c5fd;
 }

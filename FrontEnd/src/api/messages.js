@@ -1,5 +1,12 @@
 import { apiRequest } from "./client";
 
+export function getAdminConversations(token) {
+  return apiRequest("/admin/messages/pending", {
+    method: "GET",
+    token,
+  });
+}
+
 export function getMessagesByUserId(userId, token) {
   return apiRequest(`/users/${userId}/messages`, {
     method: "GET",

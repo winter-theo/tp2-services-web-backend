@@ -37,7 +37,9 @@ export default function PublicLayout() {
         <NavLink to="/articles">Articles</NavLink>
         <NavLink to="/fish">Fiches Poissons</NavLink>
         <NavLink to="/about">A Propos</NavLink>
-        {isAuthenticated ? <NavLink to="/messages">Mes Messages</NavLink> : null}
+        {isAuthenticated ? (
+          <NavLink to="/messages">{user?.role === "ADMIN" ? "Admin Messages" : "Mes Messages"}</NavLink>
+        ) : null}
         {user?.role === "ADMIN" ? <NavLink to="/admin/users">Admin Users</NavLink> : null}
         {user?.role === "ADMIN" ? <NavLink to="/admin/articles">Admin Articles</NavLink> : null}
         {user?.role === "ADMIN" ? <NavLink to="/admin/fish">Admin Fish</NavLink> : null}
