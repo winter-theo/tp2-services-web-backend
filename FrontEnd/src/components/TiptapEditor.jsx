@@ -1,9 +1,11 @@
-import { Extension } from "@tiptap/core";
+import { Extension, Node } from "@tiptap/core";
 import Color from "@tiptap/extension-color";
 import FontFamily from "@tiptap/extension-font-family";
+import Heading from "@tiptap/extension-heading";
 import Highlight from "@tiptap/extension-highlight";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
+import Paragraph from "@tiptap/extension-paragraph";
 import Placeholder from "@tiptap/extension-placeholder";
 import TextAlign from "@tiptap/extension-text-align";
 import TextStyle from "@tiptap/extension-text-style";
@@ -53,6 +55,115 @@ const mergeStylesAndContent = (styles, content) => {
   }
   return stylePart || contentPart;
 };
+
+const htmlAttr = (element, name) => element.getAttribute(name) || null;
+
+const TemplateContainer = Node.create({
+  name: "templateContainer",
+  group: "block",
+  content: "block*",
+  defining: true,
+  addAttributes() {
+    return {
+      tag: {
+        default: "div",
+        parseHTML: (element) => element.tagName.toLowerCase(),
+      },
+      class: {
+        default: null,
+        parseHTML: (element) => htmlAttr(element, "class"),
+      },
+      id: {
+        default: null,
+        parseHTML: (element) => htmlAttr(element, "id"),
+      },
+      style: {
+        default: null,
+        parseHTML: (element) => htmlAttr(element, "style"),
+      },
+      dataArticleSlug: {
+        default: null,
+        parseHTML: (element) => htmlAttr(element, "data-article-slug"),
+      },
+      dataFishRefs: {
+        default: null,
+        parseHTML: (element) => htmlAttr(element, "data-fish-refs"),
+      },
+      dataFishSlug: {
+        default: null,
+        parseHTML: (element) => htmlAttr(element, "data-fish-slug"),
+      },
+      dataScientificName: {
+        default: null,
+        parseHTML: (element) => htmlAttr(element, "data-scientific-name"),
+      },
+      dataTags: {
+        default: null,
+        parseHTML: (element) => htmlAttr(element, "data-tags"),
+      },
+    };
+  },
+  parseHTML() {
+    return [
+      { tag: "article" },
+      { tag: "header" },
+      { tag: "section" },
+      { tag: "div" },
+      { tag: "aside" },
+      { tag: "main" },
+      { tag: "footer" },
+    ];
+  },
+  renderHTML({ HTMLAttributes }) {
+    const tag = HTMLAttributes.tag || "div";
+    const attrs = {
+      class: HTMLAttributes.class || undefined,
+      id: HTMLAttributes.id || undefined,
+      style: HTMLAttributes.style || undefined,
+      "data-article-slug": HTMLAttributes.dataArticleSlug || undefined,
+      "data-fish-refs": HTMLAttributes.dataFishRefs || undefined,
+      "data-fish-slug": HTMLAttributes.dataFishSlug || undefined,
+      "data-scientific-name": HTMLAttributes.dataScientificName || undefined,
+      "data-tags": HTMLAttributes.dataTags || undefined,
+    };
+    return [tag, attrs, 0];
+  },
+});
+
+const RichParagraph = Paragraph.extend({
+  addAttributes() {
+    return {
+      class: {
+        default: null,
+        parseHTML: (element) => htmlAttr(element, "class"),
+        renderHTML: (attributes) => (attributes.class ? { class: attributes.class } : {}),
+      },
+      style: {
+        default: null,
+        parseHTML: (element) => htmlAttr(element, "style"),
+        renderHTML: (attributes) => (attributes.style ? { style: attributes.style } : {}),
+      },
+    };
+  },
+});
+
+const RichHeading = Heading.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      class: {
+        default: null,
+        parseHTML: (element) => htmlAttr(element, "class"),
+        renderHTML: (attributes) => (attributes.class ? { class: attributes.class } : {}),
+      },
+      style: {
+        default: null,
+        parseHTML: (element) => htmlAttr(element, "style"),
+        renderHTML: (attributes) => (attributes.style ? { style: attributes.style } : {}),
+      },
+    };
+  },
+});
 
 const FontSize = Extension.create({
   name: "fontSize",
@@ -109,8 +220,12 @@ export default function TiptapEditor({ value, onChange, placeholder = "Saisir du
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        heading: { levels: [2, 3] },
+        paragraph: false,
+        heading: false,
       }),
+      TemplateContainer,
+      RichParagraph,
+      RichHeading.configure({ levels: [1, 2, 3] }),
       TextStyle,
       FontSize,
       Color,

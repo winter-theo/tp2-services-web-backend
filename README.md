@@ -1,4 +1,4 @@
-# TP3-v1 - Aquarium App (BackEnd + FrontEnd)
+# TP - Aquarium App (BackEnd + FrontEnd)
 
 Application full-stack avec:
 - **BackEnd**: Node.js, Express, Prisma, PostgreSQL
@@ -17,7 +17,7 @@ Ce guide permet à un autre développeur d'installer le projet et de lancer une 
 
 ```bash
 git clone <URL_DU_REPO>
-cd TP3-v1
+cd TP3
 ```
 
 ## 3. Configuration BackEnd

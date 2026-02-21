@@ -1,9 +1,0 @@
-Faire en démo :
-
-recherche par mot-clés : aquarium -> 5 articles avec juste accroche
-puis choisir "betta" ds le dropdown : -> 2 articles
-
-Montrer la pagination sur les articles
-
-Il y a 4 fiches poissons impléméentées : néon, betta, scalaire, guppy, Corydoras
-En montrer 1, avec les articles associés
