@@ -50,8 +50,14 @@ export default function AdminUsersPage() {
             <span>
               {user.email} - {user.role}
             </span>
-            <button type="button" className="text-button" onClick={() => onDelete(user.id)}>
-              supprimer
+            <button
+              type="button"
+              className="icon-action icon-delete"
+              onClick={() => onDelete(user.id)}
+              title="Supprimer"
+              aria-label="Supprimer"
+            >
+              🗑️
             </button>
           </li>
         ))}

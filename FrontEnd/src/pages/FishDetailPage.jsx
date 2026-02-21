@@ -29,12 +29,10 @@ export default function FishDetailPage() {
 
   return (
     <div>
-      <h1>Détail poisson</h1>
       <ApiStatus error={error} />
       {loading ? <p>Chargement...</p> : null}
       {fish ? (
         <article className="sub-card">
-          <h2>{fish.name}</h2>
           <div className="rich-content" dangerouslySetInnerHTML={{ __html: fish.description || "" }} />
         </article>
       ) : null}

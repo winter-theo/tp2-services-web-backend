@@ -132,7 +132,6 @@ export default function ArticlesPage() {
       ) : null}
       {!loading && !isSearchMode && currentArticle ? (
         <article className="sub-card">
-          <h2>{currentArticle.title}</h2>
           <div className="rich-content" dangerouslySetInnerHTML={{ __html: currentArticle.content || "" }} />
           <p className="hint">Lié aux poissons:</p>
           {currentArticle.fishes?.length ? (

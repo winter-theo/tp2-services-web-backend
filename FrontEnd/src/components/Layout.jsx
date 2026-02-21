@@ -14,7 +14,7 @@ export default function Layout() {
     <main className="page">
       <header className="shell-header">
         <Link to="/articles" className="brand">
-          Aquarium BackOffice
+          <img src="/logo.png" alt="Logo Aquarium" className="brand-logo" />
         </Link>
         <div className="user-box">
           <span>

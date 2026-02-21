@@ -44,7 +44,7 @@ export default function AdminFishPage() {
     <div>
       <h1>Admin - Fish</h1>
       <div className="row">
-        <Link className="inline-link" to="/admin/fish/create">
+        <Link className="button-link" to="/admin/fish/create">
           Créer une fiche poisson
         </Link>
       </div>
@@ -56,15 +56,31 @@ export default function AdminFishPage() {
             <span>
               <strong>{fish.name}</strong>
             </span>
-            <span className="row compact">
-              <Link className="inline-link" to={`/admin/fish/${fish.id}`}>
-                voir
+            <span className="row compact admin-actions">
+              <Link
+                className="icon-action"
+                to={`/admin/fish/${fish.id}`}
+                title="Voir"
+                aria-label="Voir"
+              >
+                👁
               </Link>
-              <Link className="inline-link" to={`/admin/fish/${fish.id}/edit`}>
-                modifier
+              <Link
+                className="icon-action"
+                to={`/admin/fish/${fish.id}/edit`}
+                title="Modifier"
+                aria-label="Modifier"
+              >
+                ✏️
               </Link>
-              <button type="button" className="text-button" onClick={() => onDelete(fish.id)}>
-                supprimer
+              <button
+                type="button"
+                className="icon-action icon-delete"
+                onClick={() => onDelete(fish.id)}
+                title="Supprimer"
+                aria-label="Supprimer"
+              >
+                🗑️
               </button>
             </span>
           </li>

@@ -44,7 +44,7 @@ export default function AdminArticlesPage() {
     <div>
       <h1>Admin - Articles</h1>
       <div className="row">
-        <Link className="inline-link" to="/admin/articles/create">
+        <Link className="button-link" to="/admin/articles/create">
           Créer un article
         </Link>
       </div>
@@ -56,15 +56,31 @@ export default function AdminArticlesPage() {
             <span>
               <strong>{article.title}</strong> - {article.status}
             </span>
-            <span className="row compact">
-              <Link className="inline-link" to={`/admin/articles/${article.id}`}>
-                voir
+            <span className="row compact admin-actions">
+              <Link
+                className="icon-action"
+                to={`/admin/articles/${article.id}`}
+                title="Voir"
+                aria-label="Voir"
+              >
+                👁
               </Link>
-              <Link className="inline-link" to={`/admin/articles/${article.id}/edit`}>
-                modifier
+              <Link
+                className="icon-action"
+                to={`/admin/articles/${article.id}/edit`}
+                title="Modifier"
+                aria-label="Modifier"
+              >
+                ✏️
               </Link>
-              <button type="button" className="text-button" onClick={() => onDelete(article.id)}>
-                supprimer
+              <button
+                type="button"
+                className="icon-action icon-delete"
+                onClick={() => onDelete(article.id)}
+                title="Supprimer"
+                aria-label="Supprimer"
+              >
+                🗑️
               </button>
             </span>
           </li>

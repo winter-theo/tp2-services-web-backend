@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function PublicLayout() {
@@ -13,7 +13,9 @@ export default function PublicLayout() {
   return (
     <main className="page">
       <header className="shell-header">
-        <p className="brand">Aquarium Public</p>
+        <Link to="/articles" className="brand" aria-label="Accueil">
+          <img src="/logo.png" alt="Logo Aquarium" className="brand-logo" />
+        </Link>
         <div className="user-box">
           {isAuthenticated ? (
             <>

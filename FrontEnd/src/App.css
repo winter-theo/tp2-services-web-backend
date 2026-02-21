@@ -63,10 +63,33 @@ h1 {
   text-decoration: none;
 }
 
+.brand-logo {
+  display: block;
+  height: 54px;
+  width: auto;
+  max-width: 240px;
+  object-fit: contain;
+}
+
 .user-box {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+.user-box a {
+  text-decoration: none;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: #ffffff;
+}
+
+.user-box a.active {
+  color: #ffffff;
+  background: #0f172a;
+  border-color: #0f172a;
 }
 
 .shell-nav {
@@ -227,6 +250,19 @@ pre {
   text-decoration: underline;
 }
 
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+  border: 1px solid #0f172a;
+  border-radius: 6px;
+  background: #0f172a;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
 .text-button {
   border: none;
   background: transparent;
@@ -234,6 +270,35 @@ pre {
   padding: 0;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.admin-actions {
+  gap: 6px;
+}
+
+.icon-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1;
+  color: #0f172a;
+  cursor: pointer;
+  padding: 0;
+}
+
+.icon-action:hover {
+  background: #f8fafc;
+}
+
+.icon-delete {
+  border-color: #fecaca;
 }
 
 .stack {
