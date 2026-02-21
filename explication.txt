@@ -1,0 +1,82 @@
+AUTHENTIFICATION JWT - RESUME DU PROJET
+=======================================
+
+Principe (simple)
+-----------------
+- L'utilisateur envoie email + mot de passe sur /auth/login.
+- Le back verifie les identifiants puis cree un token JWT signe.
+- Le front stocke ce token (localStorage) et l'envoie dans chaque requete:
+  Authorization: Bearer <token>
+- Le back lit ce header, verifie le token et reconstruit req.currentUser.
+- Les middlewares controlent ensuite l'acces (connecte, admin, self/admin).
+
+Ce que contient le token
+------------------------
+- sub: id utilisateur
+- email
+- role (USER ou ADMIN)
+- expiration (par defaut 1h)
+
+Variables de conf JWT (BackEnd)
+-------------------------------
+- JWT_SECRET : cle de signature (important en prod)
+- JWT_EXPIRES_IN : duree de validite (ex: 1h)
+
+Etapes de mise en place dans CE projet
+--------------------------------------
+1) Creation des routes d'authentification
+   - POST /auth/register
+   - POST /auth/login
+
+2) Implementation login/register
+   - hash mot de passe (sha256 dans ce projet)
+   - creation du JWT a la connexion
+
+3) Ajout de la couche JWT
+   - signature du token
+   - verification/decodage du token
+
+4) Ajout des middlewares de securite
+   - attachCurrentUser (lit Bearer + remplit req.currentUser)
+   - requireAuth
+   - requireAdmin
+   - requireSelfOrAdmin
+
+5) Brancher les middlewares sur les routes metier
+   - routes user/admin/messages/articles/fish selon les besoins
+
+6) Cote front
+   - AuthContext: login/register/logout + stockage token/user
+   - api client: ajout automatique du header Authorization
+   - ProtectedRoute + redirections selon role
+
+Fichiers/modules impactes
+-------------------------
+BackEnd:
+- BackEnd/src/security/jwt.ts
+- BackEnd/src/controllers/authController.ts
+- BackEnd/src/controllers/middleware.ts
+- BackEnd/src/routes/authRoutes.ts
+- BackEnd/src/index.ts
+- BackEnd/src/models/request.ts
+- BackEnd/src/models/entities.ts
+- BackEnd/src/models/dtos.ts
+
+FrontEnd:
+- FrontEnd/src/context/AuthContext.jsx
+- FrontEnd/src/api/auth.js
+- FrontEnd/src/api/client.js
+- FrontEnd/src/components/ProtectedRoute.jsx
+- FrontEnd/src/components/Layout.jsx
+- FrontEnd/src/components/PublicLayout.jsx
+- FrontEnd/src/App.jsx
+- FrontEnd/src/main.jsx
+- FrontEnd/src/pages/LoginPage.jsx
+- FrontEnd/src/pages/RegisterPage.jsx
+
+Remarque securite
+-----------------
+- Pour un projet reel, il faut au minimum:
+  - un JWT_SECRET fort et non versionne
+  - un hash mot de passe robuste (bcrypt/argon2) plutot que sha256 simple
+  - idealement refresh token + rotation + revoke

@@ -73,7 +73,8 @@ export default function MessagesPage() {
   };
 
   const sendMessage = async () => {
-    if (!content.trim() || !targetUserId) {
+    const cleanedContent = content.trim();
+    if (!cleanedContent || !targetUserId) {
       return;
     }
 
@@ -81,7 +82,7 @@ export default function MessagesPage() {
     setError("");
     setSuccess("");
     try {
-      await postMessageForUser(targetUserId, content, token);
+      await postMessageForUser(targetUserId, cleanedContent, token);
       setContent("");
       setSuccess("Message envoyé.");
       await refreshMessages();
@@ -118,6 +119,13 @@ export default function MessagesPage() {
       return "VOUS";
     }
     return "ADMIN";
+  };
+
+  const renderContent = (value) => {
+    if (typeof value !== "string") {
+      return "";
+    }
+    return value.trim();
   };
 
   return (
@@ -163,7 +171,7 @@ export default function MessagesPage() {
               {messages.length === 0 ? <p className="hint">Pas encore de messages.</p> : null}
               {messages.map((message) => (
                 <article key={message.id} className={bubbleClass(message)}>
-                  <p>{message.content}</p>
+                  <p>{renderContent(message.content)}</p>
                   <small>
                     {senderLabel(message.senderRole)} - {new Date(message.createdAt).toLocaleString()}
                   </small>
@@ -192,7 +200,7 @@ export default function MessagesPage() {
             {messages.length === 0 ? <p className="hint">Pas encore de messages.</p> : null}
             {messages.map((message) => (
               <article key={message.id} className={bubbleClass(message)}>
-                <p>{message.content}</p>
+                <p>{renderContent(message.content)}</p>
                 <small>
                   {senderLabel(message.senderRole)} - {new Date(message.createdAt).toLocaleString()}
                 </small>
