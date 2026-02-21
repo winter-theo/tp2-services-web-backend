@@ -26,7 +26,24 @@ export const getFish = async (req: AuthenticatedRequest, res: Response): Promise
     return;
   }
 
-  const fish = await prisma.fish.findUnique({ where: { id: fishId } });
+  const fish = await prisma.fish.findUnique({
+    where: { id: fishId },
+    include: {
+      articles: {
+        include: {
+          article: {
+            select: {
+              id: true,
+              title: true,
+              content: true,
+              status: true,
+              createdAt: true,
+            },
+          },
+        },
+      },
+    },
+  });
   if (!fish) {
     res.status(404).json({ message: "fish not found" });
     return;

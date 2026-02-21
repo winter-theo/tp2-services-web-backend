@@ -34,7 +34,6 @@ export default function LoginPage() {
     <main className="page auth-page">
       <section className="card auth-card">
         <h1>Connexion</h1>
-        <p className="hint">JWT sur `Authorization: Bearer ...`</p>
         <form onSubmit={onSubmit} className="form">
           <input
             type="email"

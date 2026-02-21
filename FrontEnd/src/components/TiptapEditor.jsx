@@ -10,7 +10,7 @@ import TextStyle from "@tiptap/extension-text-style";
 import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const FONT_FAMILIES = [
   { label: "System", value: "" },
@@ -28,12 +28,30 @@ const FONT_SIZES = [
 ];
 
 const HEX_COLOR = /^#[0-9a-f]{6}$/i;
+const STYLE_TAG_REGEX = /<style\b[^>]*>[\s\S]*?<\/style>/gi;
 
 const safeColorValue = (value, fallback) => {
   if (typeof value !== "string") {
     return fallback;
   }
   return HEX_COLOR.test(value) ? value : fallback;
+};
+
+const extractStylesAndContent = (html) => {
+  const rawHtml = typeof html === "string" ? html : "";
+  const styleBlocks = rawHtml.match(STYLE_TAG_REGEX) || [];
+  const styles = styleBlocks.join("\n");
+  const content = rawHtml.replace(STYLE_TAG_REGEX, "");
+  return { styles, content };
+};
+
+const mergeStylesAndContent = (styles, content) => {
+  const stylePart = (styles || "").trim();
+  const contentPart = (content || "").trim();
+  if (stylePart && contentPart) {
+    return `${stylePart}\n${contentPart}`;
+  }
+  return stylePart || contentPart;
 };
 
 const FontSize = Extension.create({
@@ -83,7 +101,10 @@ function ToolbarButton({ onClick, label, active, disabled }) {
 
 export default function TiptapEditor({ value, onChange, placeholder = "Saisir du texte..." }) {
   const [sourceMode, setSourceMode] = useState(false);
-  const [sourceValue, setSourceValue] = useState(value || "");
+  const initialSplit = extractStylesAndContent(value || "");
+  const [sourceValue, setSourceValue] = useState(mergeStylesAndContent(initialSplit.styles, initialSplit.content));
+  const [preservedStyles, setPreservedStyles] = useState(initialSplit.styles);
+  const preservedStylesRef = useRef(initialSplit.styles);
 
   const editor = useEditor({
     extensions: [
@@ -113,9 +134,9 @@ export default function TiptapEditor({ value, onChange, placeholder = "Saisir du
         placeholder,
       }),
     ],
-    content: value || "",
+    content: initialSplit.content,
     onUpdate: ({ editor: currentEditor }) => {
-      onChange(currentEditor.getHTML());
+      onChange(mergeStylesAndContent(preservedStylesRef.current, currentEditor.getHTML()));
     },
     editorProps: {
       attributes: {
@@ -128,12 +149,14 @@ export default function TiptapEditor({ value, onChange, placeholder = "Saisir du
     if (!editor) {
       return;
     }
-    const html = value || "";
-    if (editor.getHTML() !== html) {
-      editor.commands.setContent(html, false);
+    const { styles, content } = extractStylesAndContent(value || "");
+    preservedStylesRef.current = styles;
+    setPreservedStyles(styles);
+    if (editor.getHTML() !== content) {
+      editor.commands.setContent(content, false);
     }
     if (!sourceMode) {
-      setSourceValue(html);
+      setSourceValue(mergeStylesAndContent(styles, content));
     }
   }, [editor, value, sourceMode]);
 
@@ -195,13 +218,16 @@ export default function TiptapEditor({ value, onChange, placeholder = "Saisir du
     }
 
     if (sourceMode) {
-      editor.commands.setContent(sourceValue || "", false);
-      onChange(sourceValue || "");
+      const { styles, content } = extractStylesAndContent(sourceValue || "");
+      preservedStylesRef.current = styles;
+      setPreservedStyles(styles);
+      editor.commands.setContent(content, false);
+      onChange(mergeStylesAndContent(styles, content));
       setSourceMode(false);
       return;
     }
 
-    setSourceValue(editor.getHTML());
+    setSourceValue(mergeStylesAndContent(preservedStyles, editor.getHTML()));
     setSourceMode(true);
   };
 

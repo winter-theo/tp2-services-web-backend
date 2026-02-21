@@ -12,6 +12,7 @@ const htmlToPlainText = (html) => {
     return "";
   }
   return html
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/\s+/g, " ")
     .trim();
