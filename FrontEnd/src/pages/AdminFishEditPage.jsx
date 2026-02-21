@@ -58,6 +58,7 @@ export default function AdminFishEditPage() {
           submitLabel="Enregistrer"
           loading={submitting}
           richDescription
+          className="form-wide"
         />
       ) : null}
       <div className="row">

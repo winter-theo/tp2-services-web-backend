@@ -6,7 +6,14 @@ const toInitialState = (initialValues) => ({
   description: initialValues?.description ?? "",
 });
 
-export default function FishForm({ initialValues, onSubmit, submitLabel, loading, richDescription }) {
+export default function FishForm({
+  initialValues,
+  onSubmit,
+  submitLabel,
+  loading,
+  richDescription,
+  className = "",
+}) {
   const [form, setForm] = useState(toInitialState(initialValues));
 
   useEffect(() => {
@@ -22,7 +29,7 @@ export default function FishForm({ initialValues, onSubmit, submitLabel, loading
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className={`form ${className}`.trim()} onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Nom"

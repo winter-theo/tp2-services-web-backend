@@ -15,6 +15,7 @@ export default function ArticleForm({
   submitLabel,
   loading,
   richContent,
+  className = "",
 }) {
   const [form, setForm] = useState(toInitialState(initialValues));
   useEffect(() => {
@@ -41,7 +42,7 @@ export default function ArticleForm({
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className={`form ${className}`.trim()} onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Titre"

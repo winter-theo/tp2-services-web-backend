@@ -68,7 +68,6 @@ export default function FishPage() {
                 return (
                   <article key={letter} id={`letter-${letter}`} className="fish-group fish-group-empty">
                     <h2>{letter}</h2>
-                    <p className="hint">Aucun poisson</p>
                   </article>
                 );
               }

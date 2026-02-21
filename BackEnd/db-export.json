@@ -65,97 +65,22 @@
       },
       {
         "id": 19,
-        "name": "Tétra citron (Hyphessobrycon pulchripinnis)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 20,
-        "name": "Tétra fantôme noir (Hyphessobrycon megalopterus)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 21,
-        "name": "Tétra fantôme rouge (Hyphessobrycon sweglesi)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 22,
-        "name": "Tétra empereur (Nematobrycon palmeri)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 23,
-        "name": "Tétra de Buenos Aires (Hyphessobrycon anisitsi)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 24,
-        "name": "Tétra cuivré (Hasemania nana)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 25,
-        "name": "Tétra amande (Hyphessobrycon amandae)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 26,
-        "name": "Tétra nez rouge (Hemigrammus rhodostomus)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 27,
-        "name": "Tétra pingouin (Thayeria boehlkei)",
+        "name": "Tétra (Hyphessobrycon pulchripinnis)",
         "description": "Description à venir"
       },
       {
         "id": 28,
-        "name": "Rasbora arlequin (Trigonostigma heteromorpha)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 29,
-        "name": "Rasbora galaxy (Danio margaritatus)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 30,
-        "name": "Rasbora hengeli (Trigonostigma hengeli)",
+        "name": "Rasbora (Trigonostigma heteromorpha)",
         "description": "Description à venir"
       },
       {
         "id": 31,
-        "name": "Danio rerio (Danio rerio)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 32,
-        "name": "Danio léopard (Danio rerio var. frankei)",
+        "name": "Danio (Danio rerio)",
         "description": "Description à venir"
       },
       {
         "id": 33,
-        "name": "Barbus cerise (Puntius titteya)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 34,
-        "name": "Barbus pentazona (Desmopuntius pentazona)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 35,
-        "name": "Barbus doré (Puntius semifasciolatus)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 36,
-        "name": "Barbus sumatra (Puntigrus tetrazona)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 37,
-        "name": "Rasbora espei (Trigonostigma espei)",
+        "name": "Barbus (Puntius titteya)",
         "description": "Description à venir"
       },
       {
@@ -176,21 +101,6 @@
       {
         "id": 41,
         "name": "Mangeur d’algues siamois (Crossocheilus siamensis)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 42,
-        "name": "Corydoras panda (Corydoras panda)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 43,
-        "name": "Corydoras sterbai (Corydoras sterbai)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 44,
-        "name": "Corydoras aeneus (Corydoras aeneus)",
         "description": "Description à venir"
       },
       {
@@ -220,12 +130,7 @@
       },
       {
         "id": 50,
-        "name": "Molly noir (Poecilia sphenops)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 51,
-        "name": "Molly voile (Poecilia latipinna)",
+        "name": "Molly (Poecilia sphenops)",
         "description": "Description à venir"
       },
       {
@@ -239,21 +144,6 @@
         "description": "Description à venir"
       },
       {
-        "id": 54,
-        "name": "Gourami perlé (Trichopodus leerii)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 55,
-        "name": "Gourami bleu (Trichopodus trichopterus)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 56,
-        "name": "Gourami miel (Trichogaster chuna)",
-        "description": "Description à venir"
-      },
-      {
         "id": 57,
         "name": "Ramirezi (Mikrogeophagus ramirezi)",
         "description": "Description à venir"
@@ -261,11 +151,6 @@
       {
         "id": 58,
         "name": "Apistogramma cacatuoides (Apistogramma cacatuoides)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 59,
-        "name": "Apistogramma agassizii (Apistogramma agassizii)",
         "description": "Description à venir"
       },
       {
@@ -285,22 +170,17 @@
       },
       {
         "id": 63,
-        "name": "Poisson hachette marbré (Carnegiella strigata)",
+        "name": "Hachette marbré (Carnegiella strigata)",
         "description": "Description à venir"
       },
       {
         "id": 64,
-        "name": "Poisson crayon (Nannostomus beckfordi)",
+        "name": "Crayon (Nannostomus beckfordi)",
         "description": "Description à venir"
       },
       {
         "id": 65,
-        "name": "Poisson arc-en-ciel de Boeseman (Melanotaenia boesemani)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 66,
-        "name": "Poisson arc-en-ciel nain (Melanotaenia praecox)",
+        "name": "Arc-en-ciel (Melanotaenia boesemani)",
         "description": "Description à venir"
       },
       {
@@ -310,12 +190,7 @@
       },
       {
         "id": 68,
-        "name": "Pseudomugil de Gertrude (Pseudomugil gertrudae)",
-        "description": "Description à venir"
-      },
-      {
-        "id": 69,
-        "name": "Pseudomugil furcatus (Pseudomugil furcatus)",
+        "name": "Pseudomugil (Pseudomugil gertrudae)",
         "description": "Description à venir"
       },
       {

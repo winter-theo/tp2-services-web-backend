@@ -71,6 +71,7 @@ export default function AdminArticleEditPage() {
           submitLabel="Enregistrer"
           loading={submitting}
           richContent
+          className="form-wide"
         />
       ) : null}
       <div className="row">

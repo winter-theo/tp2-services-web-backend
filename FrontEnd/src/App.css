@@ -96,6 +96,11 @@ h1 {
   max-width: 360px;
 }
 
+.form-wide {
+  max-width: none;
+  width: 100%;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -428,6 +433,7 @@ pre {
 .fish-directory {
   display: grid;
   gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .fish-group {
@@ -443,6 +449,12 @@ pre {
 
 .fish-group-empty {
   background: #f8fafc;
+}
+
+@media (max-width: 720px) {
+  .fish-directory {
+    grid-template-columns: 1fr;
+  }
 }
 
 .search-item {
